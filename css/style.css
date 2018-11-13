@@ -1,0 +1,15 @@
+body {
+    text-align: center;
+    background-image: radial-gradient(circle, grey, green, grey);
+
+}
+
+h1 {
+  margin: 50px 0;
+}
+
+canvas {
+  box-shadow: 0 10px 30px 10px black;
+  background-color: grey;
+
+}
