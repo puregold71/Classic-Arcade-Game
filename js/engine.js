@@ -68,6 +68,7 @@ var Engine = (function(global) {
         main();
     }
 
+
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -94,6 +95,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
+
     }
 
     /* This function initially draws the "game level", it will then call
@@ -152,17 +154,43 @@ var Engine = (function(global) {
         allEnemies.forEach(function(enemy) {
             enemy.render();
         });
+        hearts.forEach(function(heart) {
+          heart.render();
+        });
 
         player.render();
+
     }
 
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
+
     function reset() {
-        // noop
+      playerPoints.innerHTML = 0;
+      winner.classList.remove('win')
+      button.style.display ="none";
+      for(let heart in hearts){
+        heart.y = -10;
+      }
+      heart1.x = 1;
+      heart2.x = 101;
+      heart3.x = 201;
+      heart4.x = 301;
+      heart5.x = 401;
+
+      //add movement ability back to player
+      document.addEventListener('keydown', presskey)
+      //add speed back to the Enemies
+      for(let enemy of allEnemies) {
+        enemy.speed = Math.floor(Math.random()*(129)+100);
+      }
+      enemy1.speed = enemy2.speed
+      enemy3.speed = enemy4.speed
+      enemy5.speed = enemy6.speed
     }
+
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
@@ -173,7 +201,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-pink-girl.png'
+        'images/char-pink-girl.png',
+        'images/Heart.png'
     ]);
     Resources.onReady(init);
 
