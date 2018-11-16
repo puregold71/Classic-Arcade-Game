@@ -62,6 +62,7 @@ var Engine = (function(global) {
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
+
     function init() {
         reset();
         lastTime = Date.now();
@@ -157,7 +158,6 @@ var Engine = (function(global) {
         hearts.forEach(function(heart) {
           heart.render();
         });
-
         player.render();
 
     }
@@ -168,29 +168,41 @@ var Engine = (function(global) {
      */
 
     function reset() {
+      //reset HTML text
+      winner.classList.remove('win');
+      winner.innerHTML = "";
       playerPoints.innerHTML = 0;
-      winner.classList.remove('win')
+      total = 0;
+      //hide button
       button.style.display ="none";
-      for(let heart in hearts){
-        heart.y = -10;
+      //reset background image
+      body.style.backgroundImage = "linear-gradient(#0033cc, lightgrey, green)"
+      //reset all heart's points back to 100
+      for(heart of hearts) {
+        heart.points = 100;
       }
+      //reset heart's x position so hearts show on board
       heart1.x = 1;
       heart2.x = 101;
       heart3.x = 201;
       heart4.x = 301;
       heart5.x = 401;
-
+      //reset player position
+      player.x = 201;
+      player.y = 390;
       //add movement ability back to player
       document.addEventListener('keydown', presskey)
-      //add speed back to the Enemies
-      for(let enemy of allEnemies) {
-        enemy.speed = Math.floor(Math.random()*(129)+100);
-      }
-      enemy1.speed = enemy2.speed
-      enemy3.speed = enemy4.speed
-      enemy5.speed = enemy6.speed
-    }
+      // //add random speed to the Enemies
+      enemy1.speed = Math.floor(Math.random() * (129)) + 100;
+      enemy2.speed = enemy1.speed;
+      enemy3.speed = Math.floor(Math.random() * (49)) + 100;
+      enemy6.speed = enemy3.speed;
+      enemy4.speed = Math.floor(Math.random() * 100) ;
+      enemy5.speed = enemy4.speed;
 
+    }
+//trigger reset on button click
+button.addEventListener('click', reset);
 
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when

@@ -3,11 +3,7 @@ let total = parseInt(playerPoints.innerHTML)
 const body = document.querySelector('body');
 const winner = document.getElementById('win');
 const button = document.getElementById('button')
-
-
-
-console.log(total)
-
+const play = document.getElementById('play')
 
 // Enemies our player must avoid
 class Enemy {
@@ -34,10 +30,15 @@ update(dt) {
     //of the player and the enemy
     if(player.x <= this.x + 75 && player.x + 35 >= this.x &&
       player.y <= this.y + 25 && player.y + 30 >= this.y) {
-        body.style.backgroundImage = "none"
-        body.style.backgroundColor = "red"
+      //add animation class to turn background red on collision
+      body.classList.add('red')
       player.x = 201
       player.y = 390
+      //remove red background after 1/2 second
+      setTimeout(function() {
+        body.classList.remove('red');
+      }, 500)
+
     }
 };
 
@@ -140,7 +141,6 @@ class Player {
         //set points back to zero to prevent getting points the next time through
         heart5.points = 0
         }
-     console.log(total)
      }
 
     //prevents movement below grass
@@ -148,11 +148,14 @@ class Player {
       this.y = 390;
     }
 
-    if(total === 100){
+
+
+    if(total === 500){
       //add the win class to show winner animation
+      winner.style.display="block"
       winner.classList.add('win');
       //change text to show winner has total points
-      winner.innerHTML = "winner 500 points";
+      winner.innerHTML = "WINNER";
       //make button visible
       button.style.display = "block";
       //remove background img and add color blue
@@ -177,10 +180,20 @@ class Player {
   handleInput(keypress){
     switch(keypress) {
       case 'left':
-          this.x -= 100;
+          //prevent player moving left when the hearts row is reached
+          if(this.y === -10){
+            this.x -= 0;
+          } else {
+            this.x -= 100;
+          }
           break;
       case 'right':
-          this.x += 100;
+          //prevent player moving right when the hearts row is reached
+          if(this.y === -10){
+            this.x += 0;
+          } else {
+            this.x += 100;
+          }
           break;
       case 'up':
           this.y -= 80;
