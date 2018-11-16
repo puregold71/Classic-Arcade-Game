@@ -1,6 +1,25 @@
-frontend-nanodegree-arcade-game
-===============================
+# Classic Arcade Game
+Game based on the classic arcade game, Frogger
 
-Students should use this [rubric](https://review.udacity.com/#!/projects/2696458597/rubric) for self-checking their submission. Make sure the functions you write are **object-oriented** - either class functions (like Player and Enemy) or class prototype functions such as Enemy.prototype.checkCollisions, and that the keyword 'this' is used appropriately within your class and class prototype functions to refer to the object the function is called upon. Also be sure that the **readme.md** file is updated with your instructions on both how to 1. Run and 2. Play your arcade game.
+## Object of Game
+Little Pink Girl is looking for love! Collect all 5 hearts to win.
+Use the arrow keys to move up, down, left or right, but be careful of the oncoming cockroaches. If you get hit, you will be sent back to the grass. Once you reach the top row, collect your heart by pushing the up arrow. While on the top row, player may not move left or right (that would be too easy!). You may enter through the top row whether or not a heart is there, however, you will not get any points for an empty space. Once all hearts are collected, player wins. There is a Play Again button should you wish to play again.
 
-For detailed instructions on how to get started, check out this [guide](https://docs.google.com/document/d/1v01aScPjSWCCWQLIpFqvg3-vXLH2e8_SZQKC8jNO0Dc/pub?embedded=true).
+
+
+## Built With
+HTML/CSS/Javascript<br/>
+Libraries used are Google fonts and Font Awesome for the stars<br />
+https://fonts.googleapis.com/css?family=Bungee+Shade<br />
+https://fonts.googleapis.com/css?family=Gugi<br />
+
+
+## Author
+
+**Julie Singh** 
+
+
+
+
+
+
