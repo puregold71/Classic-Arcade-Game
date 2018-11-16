@@ -12,7 +12,6 @@
  * This engine makes the canvas' context (ctx) object globally available to make
  * writing app.js a little simpler to work with.
  */
-
 var Engine = (function(global) {
     /* Predefine the variables we'll be using within this scope,
      * create the canvas element, grab the 2D context for that canvas
@@ -23,11 +22,9 @@ var Engine = (function(global) {
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
         lastTime;
-
     canvas.width = 505;
     canvas.height = 585;
     doc.body.appendChild(canvas);
-
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
      */
@@ -40,36 +37,29 @@ var Engine = (function(global) {
          */
         var now = Date.now(),
             dt = (now - lastTime) / 1000.0;
-
         /* Call our update/render functions, pass along the time delta to
          * our update function since it may be used for smooth animation.
          */
         update(dt);
         render();
-
         /* Set our lastTime variable which is used to determine the time delta
          * for the next time this function is called.
          */
         lastTime = now;
-
         /* Use the browser's requestAnimationFrame function to call this
          * function again as soon as the browser is able to draw another frame.
          */
         win.requestAnimationFrame(main);
     }
-
     /* This function does some initial setup that should only occur once,
      * particularly setting the lastTime variable that is required for the
      * game loop.
      */
-
     function init() {
         reset();
         lastTime = Date.now();
         main();
     }
-
-
     /* This function is called by main (our game loop) and itself calls all
      * of the functions which may need to update entity's data. Based on how
      * you implement your collision detection (when two entities occupy the
@@ -83,7 +73,6 @@ var Engine = (function(global) {
         updateEntities(dt);
         // checkCollisions();
     }
-
     /* This is called by the update function and loops through all of the
      * objects within your allEnemies array as defined in app.js and calls
      * their update() methods. It will then call the update function for your
@@ -96,9 +85,7 @@ var Engine = (function(global) {
             enemy.update(dt);
         });
         player.update();
-
     }
-
     /* This function initially draws the "game level", it will then call
      * the renderEntities function. Remember, this function is called every
      * game tick (or loop of the game engine) because that's how games work -
@@ -109,21 +96,18 @@ var Engine = (function(global) {
         /* This array holds the relative URL to the image used
          * for that particular row of the game level.
          */
-        var rowImages = [
-                'images/water-block.png',   // Top row is water
-                'images/stone-block.png',   // Row 1 of 3 of stone
-                'images/stone-block.png',   // Row 2 of 3 of stone
-                'images/stone-block.png',   // Row 3 of 3 of stone
-                'images/grass-block.png',   // Row 1 of 2 of grass
-                'images/grass-block.png'    // Row 2 of 2 of grass
+        var rowImages = ['images/water-block.png', // Top row is water
+                'images/stone-block.png', // Row 1 of 3 of stone
+                'images/stone-block.png', // Row 2 of 3 of stone
+                'images/stone-block.png', // Row 3 of 3 of stone
+                'images/grass-block.png', // Row 1 of 2 of grass
+                'images/grass-block.png' // Row 2 of 2 of grass
             ],
             numRows = 6,
             numCols = 5,
             row, col;
-
         // Before drawing, clear existing canvas
-        ctx.clearRect(0,0,canvas.width,canvas.height)
-
+        ctx.clearRect(0, 0, canvas.width, canvas.height)
         /* Loop through the number of rows and columns we've defined above
          * and, using the rowImages array, draw the correct image for that
          * portion of the "grid"
@@ -140,10 +124,8 @@ var Engine = (function(global) {
                 ctx.drawImage(Resources.get(rowImages[row]), col * 101, row * 83);
             }
         }
-
         renderEntities();
     }
-
     /* This function is called by the render function and is called on each game
      * tick. Its purpose is to then call the render functions you have defined
      * on your enemy and player entities within app.js
@@ -156,73 +138,61 @@ var Engine = (function(global) {
             enemy.render();
         });
         hearts.forEach(function(heart) {
-          heart.render();
+            heart.render();
         });
         player.render();
         boy.render();
-
     }
-
     /* This function does nothing but it could have been a good place to
      * handle game reset states - maybe a new game menu or a game over screen
      * those sorts of things. It's only called once by the init() method.
      */
-
     function reset() {
-      //reset HTML text
-      winner.classList.remove('win');
-      winner.innerHTML = "";
-      playerPoints.innerHTML = 0;
-      total = 0;
-      //hide button
-      button.style.display ="none";
-      //reset background image
-      body.style.backgroundImage = "linear-gradient(#0033cc, lightgrey, green)"
-      //reset all heart's points back to 100
-      for(heart of hearts) {
-        heart.points = 100;
-      }
-      //reset heart's x position so hearts show on board
-      heart1.x = 1;
-      heart2.x = 101;
-      heart3.x = 201;
-      heart4.x = 301;
-      heart5.x = 401;
-      //reset player position
-      player.x = 201;
-      player.y = 390;
-      //add movement ability back to player
-      document.addEventListener('keydown', presskey)
-      // //add random speed to the Enemies
-      enemy1.speed = Math.floor(Math.random() * (129)) + 100;
-      enemy2.speed = enemy1.speed;
-      enemy3.speed = Math.floor(Math.random() * (49)) + 100;
-      enemy6.speed = enemy3.speed;
-      enemy4.speed = Math.floor(Math.random() * 100) ;
-      enemy5.speed = enemy4.speed;
-
-      boy.x = -100;
-      boy.y = -100;
-      
+        //reset HTML text
+        winner.classList.remove('win');
+        winner.innerHTML = "";
+        playerPoints.innerHTML = 0;
+        total = 0;
+        //hide button
+        button.style.display = "none";
+        //reset background image
+        body.style.backgroundImage = "linear-gradient(#0033cc, lightgrey, green)"
+        //reset all heart's points back to 100
+        for (heart of hearts) {
+            heart.points = 100;
+        }
+        //reset heart's x position so hearts show on board
+        heart1.x = 1;
+        heart2.x = 101;
+        heart3.x = 201;
+        heart4.x = 301;
+        heart5.x = 401;
+        //reset player position
+        player.x = 201;
+        player.y = 390;
+        //add movement ability back to player
+        document.addEventListener('keydown', presskey)
+        // //add random speed to the Enemies
+        enemy1.speed = Math.floor(Math.random() * (129)) + 100;
+        enemy2.speed = enemy1.speed;
+        enemy3.speed = Math.floor(Math.random() * (49)) + 100;
+        enemy6.speed = enemy3.speed;
+        enemy4.speed = Math.floor(Math.random() * 100);
+        enemy5.speed = enemy4.speed;
+        boy.x = -100;
+        boy.y = -100;
     }
-//trigger reset on button click
-button.addEventListener('click', reset);
-
+    //trigger reset on button click
+    button.addEventListener('click', reset);
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
      */
-    Resources.load([
-        'images/stone-block.png',
-        'images/water-block.png',
-        'images/grass-block.png',
-        'images/enemy-bug.png',
-        'images/char-pink-girl.png',
-        'images/Heart.png',
-        'images/char-boy.png'
+    Resources.load(['images/stone-block.png', 'images/water-block.png',
+        'images/grass-block.png', 'images/enemy-bug.png',
+        'images/char-pink-girl.png', 'images/Heart.png', 'images/char-boy.png'
     ]);
     Resources.onReady(init);
-
     /* Assign the canvas' context object to the global variable (the window
      * object when run in a browser) so that developers can use it more easily
      * from within their app.js files.
