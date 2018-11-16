@@ -8,8 +8,8 @@ Use the arrow keys to move up, down, left or right, but be careful of the oncomi
 ## Play
 Live version of the game can be found here: https://puregold71.github.io/
 or
-Clone this repository to your local working directory
-    $ git clone https://github.com/puregold71/Classic-Arcade-Game.git
+Clone this repository to your local working directory<br />
+    $ git clone https://github.com/puregold71/Classic-Arcade-Game.git<br />
     $ open index.html
 
 
